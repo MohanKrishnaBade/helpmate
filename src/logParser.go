@@ -80,7 +80,8 @@ func printer(str string) {
 	stdout := colorable.NewColorableStdout()
 	// colorize and print the documentation
 	mutex.Lock() // lock io before using it.
-	if err := quick.Highlight(stdout, str, "go", "terminal256", "dracula"); err != nil {
+	//re := regexp.MustCompile(`\{(?:[^{}]|(R))*\}`)
+	if err := quick.Highlight(stdout, strings.ReplaceAll(str, "\\", ""), "go", "terminal256", "dracula"); err != nil {
 		panic(err)
 	}
 	mutex.Unlock() // release io after done.
